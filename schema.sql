@@ -33,7 +33,7 @@ create table public.transactions (
     note             text,
     created_at       timestamptz not null default now()
 );
-S
+
 -- Atomic wallet operations (avoids race conditions)
 create or replace function deduct_wallet(p_tid bigint, p_amount numeric)
 returns boolean language plpgsql as $$
