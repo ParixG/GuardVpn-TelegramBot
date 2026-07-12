@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(python -m compileall -q \"c:\\\\Users\\\\Efendy MEDYA\\\\Desktop\\\\Website\\\\Vpn-Bot\" -x \"\\(\\\\.venv|venv|__pycache__\\)\")",
-      "PowerShell(if \\($?\\) { \"COMPILE OK\" })"
-    ]
-  }
-}
