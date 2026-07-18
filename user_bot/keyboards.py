@@ -3,7 +3,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMa
 from user_bot import texts
 
 MAIN_MENU = ReplyKeyboardMarkup(
-    [[texts.BTN_SUBS, texts.BTN_BUY], [texts.BTN_WALLET]],
+    [[texts.BTN_SUBS, texts.BTN_BUY], [texts.BTN_TEST, texts.BTN_WALLET]],
     resize_keyboard=True,
 )
 

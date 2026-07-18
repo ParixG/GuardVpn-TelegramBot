@@ -39,3 +39,16 @@ async def deduct_wallet(telegram_id: int, amount: float) -> bool:
 async def add_wallet(telegram_id: int, amount: float) -> None:
     client = get_client()
     client.rpc("add_wallet", {"p_tid": telegram_id, "p_amount": amount}).execute()
+
+
+async def claim_test(telegram_id: int) -> bool:
+    client = get_client()
+    result = client.rpc("claim_test", {"p_tid": telegram_id}).execute()
+    return bool(result.data)
+
+
+async def release_test(telegram_id: int) -> None:
+    client = get_client()
+    client.table("users").update({"has_used_test": False}).eq(
+        "telegram_id", telegram_id
+    ).execute()

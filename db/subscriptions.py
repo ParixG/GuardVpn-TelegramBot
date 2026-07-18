@@ -5,7 +5,9 @@ from db.client import get_client
 PAGE_SIZE = 5
 
 
-async def insert(user_telegram_id: int, guard_username: str, plan_id: int) -> dict:
+async def insert(
+    user_telegram_id: int, guard_username: str, plan_id: Optional[int]
+) -> dict:
     client = get_client()
     result = (
         client.table("subscriptions")

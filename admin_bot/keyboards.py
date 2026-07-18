@@ -6,7 +6,7 @@ MAIN_MENU = ReplyKeyboardMarkup(
     [
         [texts.BTN_ADD_USER, texts.BTN_CHECK_USER],
         [texts.BTN_ADD_BALANCE, texts.BTN_USER_MANAGER],
-        [texts.BTN_PLAN_MANAGER],
+        [texts.BTN_PLAN_MANAGER, texts.BTN_TEST_SETTINGS],
     ],
     resize_keyboard=True,
 )
@@ -100,24 +100,39 @@ def plan_detail_keyboard() -> InlineKeyboardMarkup:
 
 
 def services_select_keyboard(
-    services: list[dict], selected: set[int]
+    services: list[dict], selected: set[int], prefix: str = "pm_svc_"
 ) -> InlineKeyboardMarkup:
     buttons = [
         [
             InlineKeyboardButton(
                 f"{'✅' if svc['id'] in selected else '▫️'} {svc['remark']} (#{svc['id']})",
-                callback_data=f"pm_svc_{svc['id']}",
+                callback_data=f"{prefix}{svc['id']}",
             )
         ]
         for svc in services
     ]
     buttons.append(
         [
-            InlineKeyboardButton(texts.BTN_PM_SVC_DONE, callback_data="pm_svc_done"),
-            InlineKeyboardButton(texts.BTN_CANCEL_INLINE, callback_data="pm_svc_cancel"),
+            InlineKeyboardButton(texts.BTN_PM_SVC_DONE, callback_data=f"{prefix}done"),
+            InlineKeyboardButton(texts.BTN_CANCEL_INLINE, callback_data=f"{prefix}cancel"),
         ]
     )
     return InlineKeyboardMarkup(buttons)
+
+
+def test_settings_keyboard(enabled: bool) -> InlineKeyboardMarkup:
+    toggle_label = texts.BTN_TS_DISABLE if enabled else texts.BTN_TS_ENABLE
+    return InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton(toggle_label, callback_data="ts_toggle")],
+            [
+                InlineKeyboardButton(texts.BTN_PM_EDIT_DATA, callback_data="ts_edit_data"),
+                InlineKeyboardButton(texts.BTN_PM_EDIT_DAYS, callback_data="ts_edit_days"),
+            ],
+            [InlineKeyboardButton(texts.BTN_PM_EDIT_SERVICES, callback_data="ts_edit_services")],
+            [InlineKeyboardButton(texts.BTN_PM_CLOSE, callback_data="ts_close")],
+        ]
+    )
 
 
 def topup_review_keyboard(request_id: str) -> InlineKeyboardMarkup:

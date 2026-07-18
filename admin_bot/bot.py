@@ -6,6 +6,7 @@ from admin_bot.handlers.add_user import build_add_user_conversation_handler
 from admin_bot.handlers.check_user import build_check_user_conversation_handler
 from admin_bot.handlers.plan_manager import build_plan_manager_conversation_handler
 from admin_bot.handlers.start import start
+from admin_bot.handlers.test_settings import build_test_settings_conversation_handler
 from admin_bot.handlers.topup_review import register_topup_review_handlers
 from admin_bot.handlers.user_manager import register_user_manager_handlers
 
@@ -18,6 +19,7 @@ def build_admin_app() -> Application:
     app.add_handler(build_add_balance_conversation_handler())
     app.add_handler(build_check_user_conversation_handler())
     app.add_handler(build_plan_manager_conversation_handler())
+    app.add_handler(build_test_settings_conversation_handler())
     register_topup_review_handlers(app)
     register_user_manager_handlers(app)
 

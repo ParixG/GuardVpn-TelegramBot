@@ -6,6 +6,7 @@ BTN_CHECK_USER = "🔍 جستجوی کاربر"
 BTN_USER_MANAGER = "👥 مدیریت کاربران"
 BTN_ADD_BALANCE = "💰 شارژ کیف پول"
 BTN_PLAN_MANAGER = "📦 مدیریت پلن‌ها"
+BTN_TEST_SETTINGS = "🎁 اشتراک تست"
 BTN_CANCEL = "❌ انصراف"
 
 # ---------- Inline button labels ----------
@@ -140,6 +141,32 @@ PM_DELETE_HAS_SUBS = (
     "⚠️ این پلن قابل حذف نیست چون اشتراک‌هایی به آن متصل هستند."
 )
 PM_ERROR = "⚠️ خطا در انجام عملیات. دوباره تلاش کنید."
+
+# ---------- Test subscription settings ----------
+BTN_TS_ENABLE = "🟢 روشن کردن"
+BTN_TS_DISABLE = "🔴 خاموش کردن"
+
+TS_STATUS_ON = "🟢 روشن"
+TS_STATUS_OFF = "🔴 خاموش"
+TS_DETAIL = (
+    "🎁 تنظیمات اشتراک تست\n"
+    "━━━━━━━━━━━━━━━\n"
+    "🔘 وضعیت: {status}\n"
+    "📊 حجم: {data_limit_gb} گیگ\n"
+    "⏳ مدت: {duration_days} روز\n"
+    "🔗 سرویس‌های Guard: {service_ids}\n"
+    "━━━━━━━━━━━━━━━"
+)
+TS_NOT_FOUND = (
+    "⚠️ تنظیمات اشتراک تست در دیتابیس یافت نشد.\n"
+    "لطفا ردیف test_settings را طبق schema.sql ایجاد کنید."
+)
+TS_NO_SERVICES_WARNING = (
+    "⚠️ توجه: هنوز سرویسی برای اشتراک تست انتخاب نشده است.\n"
+    "تا زمانی که حداقل یک سرویس انتخاب نشود، اشتراک تست برای کاربران فعال نخواهد شد."
+)
+TS_UPDATED = "✅ تنظیمات اشتراک تست به‌روزرسانی شد."
+TS_ERROR = "⚠️ خطا در انجام عملیات. دوباره تلاش کنید."
 
 # ---------- Top-up review ----------
 TOPUP_CAPTION = (

@@ -5,6 +5,7 @@ create table public.users (
     username      text,
     first_name    text not null,
     wallet_balance numeric(12,2) not null default 0,
+    has_used_test boolean not null default false,
     created_at    timestamptz not null default now()
 );
 
@@ -21,9 +22,30 @@ create table public.subscriptions (
     id               uuid primary key default uuid_generate_v4(),
     user_telegram_id bigint not null references public.users(telegram_id) on delete cascade,
     guard_username   text not null unique,
-    plan_id          integer not null references public.plans(id),
+    plan_id          integer references public.plans(id),  -- null = test subscription
     created_at       timestamptz not null default now()
 );
+
+-- Test (trial) subscription settings — single row, managed from the admin bot
+create table public.test_settings (
+    id                boolean primary key default true check (id),
+    enabled           boolean not null default false,
+    data_limit_gb     numeric(8,2) not null default 1,
+    duration_days     integer not null default 1,
+    guard_service_ids jsonb not null default '[]'
+);
+
+insert into public.test_settings (id) values (true);
+
+-- Atomic one-test-per-user claim (avoids double-claim races)
+create or replace function claim_test(p_tid bigint)
+returns boolean language plpgsql as $$
+begin
+  update public.users set has_used_test = true
+  where telegram_id = p_tid and has_used_test = false;
+  return found;
+end;
+$$;
 
 create table public.transactions (
     id               uuid primary key default uuid_generate_v4(),
